@@ -21,9 +21,9 @@ type bytesT = (
 module V1 = {
   type t;
   type optionsT;
-  [@bs.send] external toString : t => string = "";
+  [@bs.send] external toString: t => string = "toString";
   [@bs.obj]
-  external options :
+  external options:
     (
       ~node: (int, int, int, int, int, int)=?,
       ~clockseq: int=?,
@@ -31,32 +31,31 @@ module V1 = {
       ~nsecs: int=?,
       unit
     ) =>
-    optionsT =
-    "";
-  [@bs.module] external create : unit => t = "uuid/v1";
-  [@bs.module]
-  external createWithOptions : (~options: optionsT) => t = "uuid/v1";
-  [@bs.module]
-  external createWithBuffer :
+    optionsT;
+  [@bs.module "uuid"] external create: unit => t = "v1";
+  [@bs.module "uuid"]
+  external createWithOptions: (~options: optionsT) => t = "v1";
+  [@bs.module "uuid"]
+  external createWithBuffer:
     (~options: optionsT=?, ~buffer: array(int), ~offset: int, unit) => t =
-    "uuid/v1";
+    "v1";
 };
 
 module V3 = {
   type t;
-  [@bs.send] external toString : t => string = "";
-  [@bs.val] [@bs.module "uuid/v3"] external _DNS : string = "DNS";
-  [@bs.val] [@bs.module "uuid/v3"] external _URL : string = "URL";
-  [@bs.module]
-  external create :
+  [@bs.send] external toString: t => string = "toString";
+  [@bs.val] [@bs.module "uuid"] [@bs.scope "v3"] external _DNS: string = "DNS";
+  [@bs.val] [@bs.module "uuid"] [@bs.scope "v3"] external _URL: string = "URL";
+  [@bs.module "uuid"]
+  external create:
     (
       ~name: string,
       ~namespace: [@bs.unwrap] [ | `Uuid(string) | `Bytes(bytesT)]
     ) =>
     t =
-    "uuid/v3";
-  [@bs.module]
-  external createWithBuffer :
+    "v3";
+  [@bs.module "uuid"]
+  external createWithBuffer:
     (
       ~name: string,
       ~namespace: [@bs.unwrap] [ | `Uuid(string) | `Bytes(bytesT)],
@@ -65,41 +64,40 @@ module V3 = {
       unit
     ) =>
     t =
-    "uuid/v3";
+    "v3";
 };
 
 module V4 = {
   type t;
   type optionsT;
-  [@bs.send] external toString : t => string = "";
+  [@bs.send] external toString: t => string = "toString";
   [@bs.obj]
-  external options :
-    (~random: bytesT=?, ~rng: unit => bytesT=?, unit) => optionsT =
-    "";
-  [@bs.module] external create : unit => t = "uuid/v4";
-  [@bs.module]
-  external createWithOptions : (~options: optionsT) => t = "uuid/v4";
-  [@bs.module]
-  external createWithBuffer :
+  external options:
+    (~random: bytesT=?, ~rng: unit => bytesT=?, unit) => optionsT;
+  [@bs.module "uuid"] external create: unit => t = "v4";
+  [@bs.module "uuid"]
+  external createWithOptions: (~options: optionsT) => t = "v4";
+  [@bs.module "uuid"]
+  external createWithBuffer:
     (~options: optionsT=?, ~buffer: array(int), ~offset: int=?, unit) => t =
-    "uuid/v4";
+    "v4";
 };
 
 module V5 = {
   type t;
-  [@bs.send] external toString : t => string = "";
-  [@bs.val] [@bs.module "uuid/v5"] external _DNS : string = "DNS";
-  [@bs.val] [@bs.module "uuid/v5"] external _URL : string = "URL";
-  [@bs.module]
-  external create :
+  [@bs.send] external toString: t => string = "toString";
+  [@bs.val] [@bs.module "uuid"] [@bs.scope "v5"] external _DNS: string = "DNS";
+  [@bs.val] [@bs.module "uuid"] [@bs.scope "v5"] external _URL: string = "URL";
+  [@bs.module "uuid"]
+  external create:
     (
       ~name: string,
       ~namespace: [@bs.unwrap] [ | `Uuid(string) | `Bytes(bytesT)]
     ) =>
     t =
-    "uuid/v5";
-  [@bs.module]
-  external createWithBuffer :
+    "v5";
+  [@bs.module "uuid"]
+  external createWithBuffer:
     (
       ~name: string,
       ~namespace: [@bs.unwrap] [ | `Uuid(string) | `Bytes(bytesT)],
@@ -108,5 +106,5 @@ module V5 = {
       unit
     ) =>
     t =
-    "uuid/v5";
+    "v5";
 };

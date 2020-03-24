@@ -17,11 +17,16 @@
     "url": "https://github.com/jrdrg/bs-uuid.git"
   },
   "devDependencies": {
-    "@glennsl/bs-jest": "^0.4.2",
-    "bs-platform": "^3.0.0",
-    "jest": "^22.4.3"
+    "@babel/preset-env": "^7.9.0",
+    "@glennsl/bs-jest": "^0.5.0",
+    "bs-platform": "^7.2.2"
   },
   "dependencies": {
-    "uuid": "^3.2.1"
+    "uuid": "^7.0.2"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!bs-platform|@glennsl/bs-jest).+\\.js$"
+    ]
   }
 }
